@@ -1,164 +1,145 @@
 ﻿
-<header>
-    <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom shadow-sm mb-4">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-        <div class="container-fluid">
+    <title>@ViewData["Title"] - AgriStream IoT</title>
 
-            <a class="navbar-brand fw-bold text-success"
-               asp-controller="Home"
-               asp-action="Index">
-                🌱 AgriStream IoT
-            </a>
+    <link rel="stylesheet"
+          href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
 
-            <button class="navbar-toggler"
-                    type="button"
-                    data-bs-toggle="collapse"
-                    data-bs-target="#mainNavbar">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+    <link rel="stylesheet"
+          href="~/css/site.css"
+          asp-append-version="true" />
 
-            <div class="collapse navbar-collapse" id="mainNavbar">
+    <link rel="stylesheet"
+          href="~/AgriStream.styles.css"
+          asp-append-version="true" />
+</head>
 
-                <ul class="navbar-nav me-auto">
+<body>
 
-                    <!-- HOME -->
-                    <li class="nav-item">
-                        <a class="nav-link"
-                           asp-controller="Home"
-                           asp-action="Index">
-                            Home
-                        </a>
-                    </li>
+    <!-- Navigation -->
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom shadow-sm">
 
-                    <!-- TELEMETRY -->
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle"
-                           href="#"
-                           role="button"
-                           data-bs-toggle="dropdown">
-                            📊 Telemetry
-                        </a>
+            <div class="container-fluid">
 
-                        <ul class="dropdown-menu">
+                <a class="navbar-brand text-success fw-bold"
+                   asp-controller="Home"
+                   asp-action="Index">
+                    🌱 AgriStream IoT
+                </a>
 
-                            <li>
-                                <a class="dropdown-item"
-                                   asp-controller="Telemetry"
-                                   asp-action="Index">
-                                    View Telemetry
-                                </a>
-                            </li>
+                <button class="navbar-toggler"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#mainNavbar">
 
-                            <li>
-                                <a class="dropdown-item"
-                                   asp-controller="Telemetry"
-                                   asp-action="Add">
-                                    Add Telemetry
-                                </a>
-                            </li>
+                    <span class="navbar-toggler-icon"></span>
+                </button>
 
-                        </ul>
-                    </li>
+                <div class="collapse navbar-collapse" id="mainNavbar">
 
-                    <!-- IRRIGATION -->
-                    <li class="nav-item">
-                        <a class="nav-link"
-                           asp-controller="Irrigation"
-                           asp-action="Index">
-                            💧 Irrigation Control
-                        </a>
-                    </li>
+                    <ul class="navbar-nav me-auto">
 
-                    <!-- DRONE MANAGEMENT -->
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle"
-                           href="#"
-                           role="button"
-                           data-bs-toggle="dropdown">
-                            🚁 Drone Management
-                        </a>
+                        <li class="nav-item">
+                            <a class="nav-link"
+                               asp-controller="Home"
+                               asp-action="Index">Home</a>
+                        </li>
 
-                        <ul class="dropdown-menu">
+                        <li class="nav-item">
+                            <a class="nav-link"
+                               asp-controller="Telemetry"
+                               asp-action="Index">Telemetry Dashboard</a>
+                        </li>
 
-                            <li>
-                                <a class="dropdown-item"
-                                   asp-controller="Drone"
-                                   asp-action="Upload">
-                                    Upload Drone Image
-                                </a>
-                            </li>
+                        <li class="nav-item">
+                            <a class="nav-link"
+                               asp-controller="Telemetry"
+                               asp-action="Add">Add Telemetry</a>
+                        </li>
 
-                        </ul>
-                    </li>
+                        <li class="nav-item">
+                            <a class="nav-link"
+                               asp-controller="Irrigation"
+                               asp-action="Index">Irrigation Control</a>
+                        </li>
 
-                    <!-- USER MANAGEMENT -->
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle"
-                           href="#"
-                           role="button"
-                           data-bs-toggle="dropdown">
-                            👤 User Management
-                        </a>
+                        <li class="nav-item dropdown">
 
-                        <ul class="dropdown-menu">
+                            <a class="nav-link dropdown-toggle"
+                               href="#"
+                               data-bs-toggle="dropdown">
+                                Drone Management
+                            </a>
 
-                            <li>
-                                <a class="dropdown-item"
-                                   asp-controller="Account"
-                                   asp-action="Login">
-                                    User Login
-                                </a>
-                            </li>
+                            <ul class="dropdown-menu">
 
-                            <li>
-                                <a class="dropdown-item"
-                                   asp-controller="Account"
-                                   asp-action="Register">
-                                    Register User
-                                </a>
-                            </li>
+                     
 
-                            <li>
-                                <a class="dropdown-item"
-                                   asp-controller="Account"
-                                   asp-action="Index">
-                                    Manage Users
-                                </a>
-                            </li>
+                                <li>
+                                    <a class="dropdown-item"
+                                       asp-controller="Drone"
+                                       asp-action="Upload">
+                                        Upload Drone Image
+                                    </a>
+                                </li>
 
-                        </ul>
-                    </li>
+                            </ul>
+                        </li>
 
-                    <!-- DATABASE -->
-                    <li class="nav-item">
-                        <a class="nav-link"
-                           asp-controller="DatabaseTest"
-                           asp-action="Index">
-                            🗄️ Database Test
-                        </a>
-                    </li>
+                        <li class="nav-item">
+                            <a class="nav-link"
+                               asp-controller="Account"
+                               asp-action="Login">User Login</a>
+                        </li>
 
-                    <!-- PRIVACY -->
-                    <li class="nav-item">
-                        <a class="nav-link"
-                           asp-controller="Home"
-                           asp-action="Privacy">
-                            Privacy
-                        </a>
-                    </li>
+                        <li class="nav-item">
+                            <a class="nav-link"
+                               asp-controller="DatabaseTest"
+                               asp-action="Index">Database Test</a>
+                        </li>
 
-                </ul>
+                    </ul>
 
-                <!-- LOGIN SHORTCUT -->
-                <div class="d-flex">
-                    <a asp-controller="Account"
-                       asp-action="Login"
-                       class="btn btn-outline-success">
-                        Login
-                    </a>
                 </div>
-
             </div>
+        </nav>
+    </header>
+
+    <!-- THIS IS IMPORTANT: PAGE CONTENT -->
+    <div class="container-fluid px-4 mt-4">
+
+        <main role="main" class="pb-3">
+
+            @RenderBody()
+
+        </main>
+
+    </div>
+
+    <!-- Footer -->
+    <footer class="border-top footer text-muted mt-4">
+
+        <div class="container py-3">
+            &copy; 2026 - AgriStream IoT
         </div>
-    </nav>
-</header>
+
+    </footer>
+
+    <!-- Scripts -->
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script src="~/js/site.js"
+            asp-append-version="true"></script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+
+</body>
+</html>
