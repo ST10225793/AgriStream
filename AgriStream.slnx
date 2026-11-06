@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="../AgriStreamFunctions/AgriStreamFunctions.csproj" Id="89a62a75-7902-422b-9276-bb63b3f5f28c" />
+  <Project Path="AgriStream.csproj" />
+</Solution>

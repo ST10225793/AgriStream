@@ -1,0 +1,25 @@
+﻿<h2>AgriStream IoT Database Test</h2>
+
+<h3>@ViewBag.Message</h3>
+
+@if (ViewBag.DatabaseName != null)
+{
+    <p>Database: @ViewBag.DatabaseName</p>
+}
+
+@if (ViewBag.Error != null)
+{
+    <p style="color:red">
+        Error: @ViewBag.Error
+    </p>
+}
+
+<h3>Available System Roles</h3>
+
+@if (ViewBag.Roles != null)
+{
+    @foreach (var role in ViewBag.Roles)
+    {
+        <p>@role.RoleName</p>
+    }
+}

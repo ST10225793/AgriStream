@@ -1,0 +1,72 @@
+﻿@model AgriStream.Models.SoilTelemetry
+
+@{
+    ViewData["Title"] = "Soil Telemetry";
+}
+
+<div class="container mt-4">
+
+    <h2>AgriStream IoT - Soil Telemetry</h2>
+
+    @if (TempData["Success"] != null)
+    {
+        <div class="alert alert-success">
+            @TempData["Success"]
+        </div>
+    }
+
+    <form asp-controller="Telemetry"
+          asp-action="Add"
+          method="post">
+
+        @Html.AntiForgeryToken()
+
+        <div asp-validation-summary="All"
+             class="text-danger"></div>
+
+        <div class="mb-3">
+            <label asp-for="SensorID">Sensor ID</label>
+            <input asp-for="SensorID" class="form-control" />
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="SoilMoisture">
+                Soil Moisture (%)
+            </label>
+            <input asp-for="SoilMoisture"
+                   type="number"
+                   step="0.01"
+                   class="form-control" />
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Temperature">
+                Temperature (°C)
+            </label>
+            <input asp-for="Temperature"
+                   type="number"
+                   step="0.01"
+                   class="form-control" />
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="SoilPH">Soil pH</label>
+            <input asp-for="SoilPH"
+                   type="number"
+                   step="0.01"
+                   class="form-control" />
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Location">Field Location</label>
+            <input asp-for="Location"
+                   class="form-control" />
+        </div>
+
+        <button type="submit" class="btn btn-primary">
+            Save Telemetry
+        </button>
+
+    </form>
+
+</div>

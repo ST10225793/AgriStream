@@ -1,0 +1,56 @@
+﻿
+@model IEnumerable<AgriStream.Models.SoilTelemetry>
+
+@{
+    ViewData["Title"] = "View Telemetry";
+}
+
+<div class="container mt-4">
+
+    <h2>Soil Sensor Telemetry Records</h2>
+
+    <p>Sensor ID: @ViewBag.SensorID</p>
+
+    <table class="table table-bordered table-striped">
+
+        <thead>
+            <tr>
+                <th>Sensor ID</th>
+                <th>Moisture (%)</th>
+                <th>Temperature (°C)</th>
+                <th>Soil pH</th>
+                <th>Location</th>
+                <th>Timestamp</th>
+            </tr>
+        </thead>
+
+        <tbody>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.SensorID</td>
+                    <td>@item.SoilMoisture</td>
+                    <td>@item.Temperature</td>
+                    <td>@item.SoilPH</td>
+                    <td>@item.Location</td>
+                    <td>@item.Timestamp</td>
+                </tr>
+            }
+
+        </tbody>
+
+    </table>
+
+    @if (!Model.Any())
+    {
+        <p>No telemetry records found for this sensor.</p>
+    }
+
+    <a asp-controller="Telemetry"
+       asp-action="Add"
+       class="btn btn-primary">
+        Add New Reading
+    </a>
+
+</div>

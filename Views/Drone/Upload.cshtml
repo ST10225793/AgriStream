@@ -1,0 +1,40 @@
+﻿@{
+    ViewData["Title"] = "Drone Image Upload";
+}
+
+<h2>AgriStream IoT - Drone Image Upload</h2>
+
+<form asp-controller="Drone"
+      asp-action="Upload"
+      method="post"
+      enctype="multipart/form-data">
+
+    @Html.AntiForgeryToken()
+
+    <div class="mb-3">
+        <label>Select Drone Image</label>
+
+        <input type="file"
+               name="image"
+               accept=".jpg,.jpeg,.png,.tif,.tiff"
+               class="form-control"
+               required />
+    </div>
+
+    <button type="submit" class="btn btn-primary">
+        Upload Image
+    </button>
+
+</form>
+
+@if (ViewBag.Message != null)
+{
+    <div class="alert alert-info mt-3">
+        @ViewBag.Message
+    </div>
+}
+
+@if (ViewBag.FileName != null)
+{
+    <p>Uploaded file: @ViewBag.FileName</p>
+}
