@@ -1,82 +1,55 @@
 ﻿
 using Microsoft.AspNetCore.Mvc;
-using AgriStream.Models;
-using AgriStream.Services;
+using System.Net.Http.Json;
 
 namespace AgriStream.Controllers
 {
     public class TelemetryController : Controller
     {
-        private readonly TableStorageService _tableService;
+        private readonly HttpClient _httpClient;
+        private readonly IConfiguration _configuration;
 
         public TelemetryController(
-            TableStorageService tableService)
+            IHttpClientFactory httpClientFactory,
+            IConfiguration configuration)
         {
-            _tableService = tableService;
+            _httpClient = httpClientFactory.CreateClient();
+            _configuration = configuration;
         }
 
-        // Display telemetry input form
-        [HttpGet]
-        public IActionResult Add()
+        public async Task<IActionResult> Index()
         {
-            return View();
-        }
+            var functionUrl = _configuration[
+                "AzureFunctions:TelemetryGetUrl"];
 
-        // Save telemetry reading
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Add(
-            SoilTelemetry telemetry)
-        {
-            if (!ModelState.IsValid)
+            if (string.IsNullOrWhiteSpace(functionUrl))
             {
-                return View(telemetry);
+                ViewBag.Error = "Telemetry Function URL is not configured.";
+                return View(new List<TelemetryReading>());
             }
 
             try
             {
-                await _tableService.AddTelemetryAsync(telemetry);
+                var readings = await _httpClient
+                    .GetFromJsonAsync<List<TelemetryReading>>(
+                        functionUrl);
 
-                TempData["Success"] =
-                    "Telemetry successfully saved to Azure Table Storage!";
-
-                return RedirectToAction(nameof(Add));
+                return View(readings ?? new List<TelemetryReading>());
             }
             catch (Exception ex)
             {
-                // Log the error rather than displaying sensitive details
-                return StatusCode(500,
-                    "Unable to save telemetry. Check the application logs.");
+                ViewBag.Error = "Unable to retrieve telemetry: " + ex.Message;
+                return View(new List<TelemetryReading>());
             }
         }
+    }
 
-        // Display stored telemetry readings
-        [HttpGet]
-        public async Task<IActionResult> ViewTelemetry(
-            string sensorID,
-            DateTime? date)
-        {
-            if (string.IsNullOrWhiteSpace(sensorID))
-            {
-                return BadRequest("Sensor ID is required.");
-            }
-
-            try
-            {
-                var records =
-                    await _tableService.GetTelemetryAsync(
-                        sensorID,
-                        date ?? DateTime.UtcNow.Date);
-
-                ViewBag.SensorID = sensorID;
-
-                return View(records);
-            }
-            catch
-            {
-                return StatusCode(500,
-                    "Unable to retrieve telemetry records.");
-            }
-        }
+    public class TelemetryReading
+    {
+        public string? DeviceId { get; set; }
+        public string? SoilMoisture { get; set; }
+        public string? Temperature { get; set; }
+        public string? Humidity { get; set; }
+        public string? Timestamp { get; set; }
     }
 }

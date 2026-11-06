@@ -1,0 +1,106 @@
+﻿@{
+    ViewData["Title"] = "Irrigation Control";
+}
+
+<div class="container mt-4">
+
+    <h2>Irrigation Control Centre</h2>
+
+    <p class="text-muted">
+        Send irrigation commands to your connected field devices.
+    </p>
+
+    @if (TempData["Success"] != null)
+    {
+        <div class="alert alert-success">
+            @TempData["Success"]
+        </div>
+    }
+
+    @if (TempData["Error"] != null)
+    {
+        <div class="alert alert-danger">
+            @TempData["Error"]
+        </div>
+    }
+
+    <div class="row">
+
+        <div class="col-md-7">
+
+            <div class="card shadow-sm">
+                <div class="card-header">
+                    Trigger Irrigation
+                </div>
+
+                <div class="card-body">
+
+                    <form asp-controller="Irrigation"
+                          asp-action="Trigger"
+                          method="post">
+
+                        @Html.AntiForgeryToken()
+
+                        <div class="mb-3">
+                            <label class="form-label">
+                                Sensor / Device ID
+                            </label>
+
+                            <input name="deviceId"
+                                   class="form-control"
+                                   placeholder="e.g. SENSOR001"
+                                   required />
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">
+                                Irrigation Duration (minutes)
+                            </label>
+
+                            <input name="durationMinutes"
+                                   type="number"
+                                   class="form-control"
+                                   min="1"
+                                   max="120"
+                                   value="10"
+                                   required />
+                        </div>
+
+                        <button type="submit"
+                                class="btn btn-primary">
+                            Trigger Irrigation
+                        </button>
+
+                    </form>
+
+                </div>
+            </div>
+
+        </div>
+
+        <div class="col-md-5">
+
+            <div class="card shadow-sm p-3">
+                <h5>Command Information</h5>
+
+                <p>
+                    <strong>Processing:</strong>
+                    Azure HTTP POST Function
+                </p>
+
+                <p>
+                    <strong>Destination:</strong>
+                    Azure Storage Queue
+                </p>
+
+                <p>
+                    <strong>Execution:</strong>
+                    Queue-triggered Function
+                </p>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
