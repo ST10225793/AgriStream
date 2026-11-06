@@ -42,7 +42,14 @@ namespace AgriStream.Controllers
                 return View(new List<TelemetryReading>());
             }
         }
+        [HttpGet]
+        public IActionResult Add()
+        {
+            return View();
+        }
     }
+
+   
 
     public class TelemetryReading
     {

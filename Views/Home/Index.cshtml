@@ -2,7 +2,62 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+
+<div class="container mt-4">
+
+    <h2 class="mb-4">AgriStream Management Centre</h2>
+
+    <div class="row g-4">
+
+        <!-- Telemetry Dashboard -->
+
+        <div class="col-md-6">
+            <div class="card shadow-sm h-100">
+
+                <div class="card-body">
+
+                    <h4>Soil Telemetry</h4>
+
+                    <p class="text-muted">
+                        Monitor real-time soil moisture,
+                        temperature and humidity readings.
+                    </p>
+
+                    <a asp-controller="Telemetry"
+                       asp-action="Index"
+                       class="btn btn-primary">
+                        Open Telemetry Dashboard
+                    </a>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- Irrigation Dashboard -->
+
+        <div class="col-md-6">
+            <div class="card shadow-sm h-100">
+
+                <div class="card-body">
+
+                    <h4>Irrigation Control</h4>
+
+                    <p class="text-muted">
+                        Send irrigation commands to
+                        connected agricultural devices.
+                    </p>
+
+                    <a asp-controller="Irrigation"
+                       asp-action="Index"
+                       class="btn btn-success">
+                        Open Irrigation Control
+                    </a>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
 </div>
+
