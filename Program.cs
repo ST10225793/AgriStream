@@ -17,6 +17,19 @@ builder.Services.AddDbContext<ApplicationDbContext>(
             builder.Configuration.GetConnectionString(
                 "DefaultConnection")));
 
+
+builder.Services.AddAuthentication(
+    Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(options =>
+    {
+        options.LoginPath = "/Account/Login";
+        options.AccessDeniedPath = "/Account/AccessDenied";
+        options.ExpireTimeSpan = TimeSpan.FromHours(8);
+        options.SlidingExpiration = true;
+    });
+
+builder.Services.AddAuthorization();
+
 var app = builder.Build();
 
 if (!app.Environment.IsDevelopment())
